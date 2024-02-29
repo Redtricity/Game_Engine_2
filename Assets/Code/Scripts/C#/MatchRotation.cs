@@ -5,10 +5,9 @@ using UnityEngine;
 
 public class MatchRotation : MonoBehaviour
 {
-    [SerializeField] public Transform _target;
-    // Start is called before the first frame update
+    [SerializeField] Transform _target;
 
-    private void LateUpdate()
+    void LateUpdate()
     {
         transform.rotation = _target.rotation;
     }

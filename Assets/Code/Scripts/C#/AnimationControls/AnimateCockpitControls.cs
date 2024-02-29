@@ -17,22 +17,27 @@ public class AnimateCockpitControls : MonoBehaviour
     [SerializeField] 
     float _throttleRange = 35f;
 
-    [SerializeField] 
-    private ShipMovementInput _movementInput;
 
-    private IMovementControls ControlInput => _movementInput.MovementControls;
+
+    private IMovementControls _movementInput;
     
     // Update is called once per frame
     void Update()
     {
-        _joystick.localRotation = Quaternion.Euler(ControlInput.PitchAmount * _joystickRange.x, ControlInput.YawAmount *_joystickRange.y,ControlInput.RollAmount * _joystickRange.z);
+        if (_movementInput == null) return;
+        _joystick.localRotation = Quaternion.Euler(_movementInput.PitchAmount * _joystickRange.x, _movementInput.YawAmount *_joystickRange.y,_movementInput.RollAmount * _joystickRange.z);
         
         Vector3 throttleRotation = _throttles[0].localRotation.eulerAngles;
-        throttleRotation.x = ControlInput.ThrustAmount * _throttleRange;
+        throttleRotation.x = _movementInput.ThrustAmount * _throttleRange;
         foreach (Transform throttle in _throttles)
         {
             throttle.localRotation = Quaternion.Euler(throttleRotation);
         }
+    }
+
+    public void Init(IMovementControls movementControls)
+    {
+        _movementInput = movementControls;
     }
 
     

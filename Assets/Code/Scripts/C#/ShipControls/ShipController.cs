@@ -6,55 +6,106 @@ using UnityEngine.UIElements;
 
 public class ShipController : MonoBehaviour
 {
-    [SerializeField] private ShipMovementInput _movementInput;
-    //Ship Movement Values
-    [SerializeField] [Range(1000f, 10000f)]
-    private float _thrustForce = 7500f,
-        _pitchForce = 6000f,
-        _rollForce = 1000f,
-        _yawForce = 2000f;
+    [SerializeField] Shield _shield;
+    [SerializeField]
+    protected MovementControlsBase _movementControls;
 
-    private Rigidbody _rigidBody;
+    [SerializeField]
+    protected WeaponControlsBase _weaponControls;    
+
+    [SerializeField]
+    ShipDataSo _shipData;
+    
+    [SerializeField]
+    List<ShipEngine> _engines;
+
+    [SerializeField]
+    List<Blaster> _blasters;
+
+    [SerializeField]
+    private AnimateCockpitControls _cockpitAnimationControls;
+    
+    Rigidbody _rigidBody;
     [Range(-1f, 1f)]
-    public float _thrustAmount, _pitchAmount, _rollAmount, _yawAmount = 0f;
+    float _pitchAmount, _rollAmount, _yawAmount = 0f;
 
-    private IMovementControls ControlInput => _movementInput.MovementControls;
+    protected DamageHandler _damageHandler;
 
-    private void Awake()
+    IMovementControls MovementInput => _movementControls;
+    IWeaponControls WeaponInput => _weaponControls;
+
+    void Awake()
     {
         _rigidBody = GetComponent<Rigidbody>();
+        _damageHandler = GetComponent<DamageHandler>();
     }
-
-    private void Update()
+    void Start()
     {
-        _thrustAmount = ControlInput.ThrustAmount;
-        _rollAmount = ControlInput.RollAmount;
-        _yawAmount = ControlInput.YawAmount;
-        _pitchAmount = ControlInput.PitchAmount;
+        foreach (ShipEngine engine in _engines)
+        {
+            engine.Init(MovementInput, _rigidBody, _shipData.ThrustForce / _engines.Count);
+        }
+
+        foreach (Blaster blaster in _blasters)
+        {
+            blaster.Init(WeaponInput, _shipData.BlasterCooldown, _shipData.BlasterLaunchForce, _shipData.BlasterProjectileDuration, _shipData.BlasterDamage, _rigidBody);
+        }
+
+        if (_cockpitAnimationControls != null)
+        {
+            _cockpitAnimationControls.Init(MovementInput);
+        }
+
+        if (_shield)
+        {
+            _shield.Init(_shipData.ShieldStrength);
+        }
     }
 
-    private void FixedUpdate()
+    public virtual void OnEnable()
     {
-        if (!Mathf.Approximately(0f, _pitchAmount)) //pitch
+        if (_damageHandler == null) return;
+        _damageHandler.Init(_shipData.MaxHealth);
+        _damageHandler.HealthChanged.AddListener(OnHealthChanged);
+        _damageHandler.ObjectDestroyed.AddListener(DestroyShip);
+    }
+
+    public virtual void Update()
+    {
+        _rollAmount = MovementInput.RollAmount;
+        _yawAmount = MovementInput.YawAmount;
+        _pitchAmount = MovementInput.PitchAmount;
+    }
+
+    void FixedUpdate()
+    {
+        if (!Mathf.Approximately(0f, _pitchAmount))
         {
-            _rigidBody.AddTorque(transform.right * (_pitchForce * _pitchAmount * Time.fixedDeltaTime));
+            _rigidBody.AddTorque(transform.right * (_shipData.PitchForce * _pitchAmount * Time.fixedDeltaTime));
         }
 
-        if (!Mathf.Approximately(0f, _rollAmount)) //roll
+        if (!Mathf.Approximately(0f, _rollAmount))
         {
-            _rigidBody.AddTorque(transform.forward * (_rollForce * -_rollAmount * Time.fixedDeltaTime));
+            _rigidBody.AddTorque(transform.forward * (_shipData.RollForce * _rollAmount * Time.fixedDeltaTime));
         }
-        
-        if (!Mathf.Approximately(0f, _yawAmount)) //yaw
+
+        if (!Mathf.Approximately(0f, _yawAmount))
         {
-            _rigidBody.AddTorque(transform.up * (_yawForce * _yawAmount * Time.fixedDeltaTime));
-        }
-        
-        if (!Mathf.Approximately(0f, _thrustAmount)) //thrust
-        {
-            _rigidBody.AddForce(transform.forward * (_thrustForce * _thrustAmount * Time.fixedDeltaTime));
+            _rigidBody.AddTorque(transform.up * (_yawAmount * _shipData.YawForce * Time.fixedDeltaTime));
         }
     }
+    
+    void DestroyShip()
+    {
+        gameObject.SetActive(false);
+    }
+
+    void OnHealthChanged()
+    {
+    }
+    
 }
+
+
 
 

@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Managers : MonoBehaviour
 {
-    private static Managers _instance;
+    static Managers _instance;
 
-    private void Awake()
+    void Awake()
     {
         if (_instance != null && _instance != this)
         {

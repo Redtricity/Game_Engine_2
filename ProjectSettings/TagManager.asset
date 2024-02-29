@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - CockpitCamera
+  - FollowCamera
   layers:
   - Default
   - TransparentFX
@@ -11,13 +13,13 @@ TagManager:
   - Background
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - PlayerProjectile
+  - PlayerShield
+  - Enemy
+  - EnemyProjectile
+  - EnemyShield
+  - Asteroid
   - 
   - 
   - 
@@ -40,4 +42,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: New layer 1
+    uniqueID: 2978973343
+    locked: 0
+  - name: New Layer 2
+    uniqueID: 1979933575
+    locked: 0
+  - name: New Layer 3
+    uniqueID: 3093941481
+    locked: 0
+  - name: New Layer 4
+    uniqueID: 824651371
+    locked: 0
+  - name: New Layer 5
+    uniqueID: 21933269
+    locked: 0
+  - name: New Layer 6
+    uniqueID: 2961447717
     locked: 0
