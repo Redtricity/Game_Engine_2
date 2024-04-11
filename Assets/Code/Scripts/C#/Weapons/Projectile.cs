@@ -7,7 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] Detonator _hitEffect;
+    //[SerializeField] Detonator _hitEffect;
     [SerializeField] AudioClip _impactSound;
     
     float _launchForce;
@@ -69,10 +69,10 @@ public class Projectile : MonoBehaviour
             damageable.TakeDamage(_damage, hitPosition);
         }
 
-        if (_hitEffect != null)
-        {
-            Instantiate(_hitEffect, transform.position, Quaternion.identity);
-        }
+        //if (_hitEffect != null)
+       // {
+        //    Instantiate(_hitEffect, transform.position, Quaternion.identity);
+       // }
         Destroy(gameObject);
     }
 }

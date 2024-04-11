@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6108906136019097549}
   - component: {fileID: 2682976384237501257}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: AsteroidField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,8 +44,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccd97082242f6a14b875128bac505f7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _asteroidCount: 500
-  _radius: 300
-  _maxScale: 5
+  _asteroidCount: 200
+  _radius: 1000
+  _maxScale: 10
   _asteroidPrefabs:
   - {fileID: 4907725008704425395, guid: 8d1c053c856ccd342a247a6999fe21a2, type: 3}
+  - {fileID: 70327051729923251, guid: 14c054706926a4b4daedb942ff80a0ba, type: 3}
+  - {fileID: 734536042158316043, guid: 60087dee9a8d401428eb8cac2650d062, type: 3}
+  - {fileID: 8372853535964171725, guid: 4b2ade0b5be7f9645b882ceea67cfefc, type: 3}
+  - {fileID: 3154022289418229669, guid: ce589be1b7a7346449a3c52db9a7cc64, type: 3}
+  - {fileID: 1974751786456796194, guid: d5cf8133e83157648af5404e1e3f8c4e, type: 3}
+  - {fileID: 8422501420125115633, guid: 5e32cd08d5bbe464e923685ec45e6c89, type: 3}
+  - {fileID: 3283076551405430352, guid: 34fe897756dc7564788b9def595bd1b8, type: 3}
+  - {fileID: 8076945003133476520, guid: 404543f54e2e9f94eb6c116ca83503ce, type: 3}
+  - {fileID: 3456673936579180888, guid: a4c1d36e86b01064c988549ef5932c9c, type: 3}
+  - {fileID: 8384346206203999032, guid: 4c3866f9bdc47434496144f3586cda84, type: 3}
+  - {fileID: 7693715545201609306, guid: 20a7c7c4072edf942854ec4490ed1110, type: 3}
+  - {fileID: 8485936309606149631, guid: 5deec60603f78cf47aa9947ae2e5340f, type: 3}
+  - {fileID: 9170021297830774034, guid: e75df66f20ac4ca4b82670b91e0919ca, type: 3}
+  - {fileID: 5368724522633551599, guid: 26546b2e4b7740a40b28d6142c878056, type: 3}
