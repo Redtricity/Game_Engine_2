@@ -28,7 +28,7 @@ public class EnemyShipController : ShipController
     Transform _target;
 
     public UnityEvent<int> ShipDestroyed = new UnityEvent<int>();
-
+    
     #region Public data for debugging
 
     public string ShipState => _state.ToString();
@@ -43,13 +43,12 @@ public class EnemyShipController : ShipController
             {
                 distance = $"{Vector3.Distance(_target.position, _transform.position):F2}";
             }
-
             return distance;
         }
     }
 
     public string HealthLevel => $"{_damageHandler.Health}/{_damageHandler.MaxHealth}";
-
+    
     #endregion
 
     bool InAttackRange => Vector3.Distance(PlayerShip.transform.position, _transform.position) <= _attackRange;
@@ -80,11 +79,6 @@ public class EnemyShipController : ShipController
         EnemyShipState state = GetNextState();
         SetState(state);
         base.Update();
-        
-        if (_state == EnemyShipState.Patrol || _state == EnemyShipState.Attack)
-        {
-            Debug.Log($"{_transform.name} is {_state} at distance {DistanceToTarget} to target {_target.name}");
-        }
     }
 
     EnemyShipState GetNextState()
@@ -95,23 +89,21 @@ public class EnemyShipController : ShipController
             EnemyShipState.Attack => Attack(),
             EnemyShipState.Reposition => Reposition(),
             EnemyShipState.Retreat => Retreat(),
-            _ => EnemyShipState.None
+            _ => EnemyShipState.None  
         };
         return newState;
     }
 
     EnemyShipState Patrol()
     {
-        
         if (ShouldRetreat) return EnemyShipState.Retreat;
         if (InAttackRange) return EnemyShipState.Attack;
         if (ReachedPatrolTarget)
         {
             _target.position = Random.insideUnitSphere * _patrolRange;
         }
-
+            
         return EnemyShipState.Patrol;
-        
     }
 
     EnemyShipState Attack()
@@ -136,9 +128,6 @@ public class EnemyShipController : ShipController
     void SetState(EnemyShipState state)
     {
         if (_state == state) return;
-        
-        Debug.Log($"State Change: {_transform.name} from {_state} to {state} at position {_transform.position}");
-        
         _state = state;
         switch (state)
         {
@@ -148,10 +137,7 @@ public class EnemyShipController : ShipController
                     _target = new GameObject("Patrol Target").transform;
                     _target.position = Random.insideUnitSphere * _patrolRange;
                     _aiShipMovementControls.SetTarget(_target);
-                    
-                    Debug.Log("Patrol Target Set: " + _target.position);
                 }
-
                 break;
             case EnemyShipState.Attack:
                 if (_target)
@@ -162,9 +148,6 @@ public class EnemyShipController : ShipController
                 _target = PlayerShip.transform;
                 _aiShipMovementControls.SetTarget(_target);
                 SetWeaponsTarget(_target, _attackRange, _targetMask);
-                
-                Debug.Log($"{_transform.name} has the player in attack range at distance {Vector3.Distance(PlayerShip.transform.position, _transform.position)}");
-                Debug.Log("Attacking Player Ship: " + _target.name);
                 break;
             case EnemyShipState.Reposition:
                 _aiShipMovementControls.SetTarget(_target = GetRepositionTarget());
@@ -173,7 +156,6 @@ public class EnemyShipController : ShipController
             case EnemyShipState.Retreat:
                 _aiShipMovementControls.SetTarget(_target = GetRetreatTarget());
                 SetWeaponsTarget(null, 0, 0);
-                Debug.Log($"{_transform.name} is retreating due to low health at position {_transform.position}");
                 break;
         }
     }

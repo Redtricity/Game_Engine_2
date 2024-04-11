@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AIShipWeaponControls : WeaponControlsBase
 {
-
     public override bool PrimaryFired => _firePrimary;
     public override bool SecondaryFired => _fireSecondary;
 

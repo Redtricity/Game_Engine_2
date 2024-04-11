@@ -1623,7 +1623,7 @@ GameObject:
   - component: {fileID: 3391272593369453790}
   - component: {fileID: 4240281340487047836}
   - component: {fileID: 6890315079427253565}
-  - component: {fileID: 2322893884689107370}
+  - component: {fileID: 8580203568821505049}
   m_Layer: 6
   m_Name: PlayerShip
   m_TagString: Player
@@ -6511,7 +6511,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &2322893884689107370
+--- !u!114 &8580203568821505049
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6528,7 +6528,7 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 512
-  _radarRange: 1000
+  _radarRange: 500
   _lockOnRange: 1000
   _lockOnRadius: 15
   _maxTargets: 200
