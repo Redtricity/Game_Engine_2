@@ -3,9 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class AIShipMovementControls : MovementControlsBase
+public class AIShipMovementControls : MovementControlsBase
 {
-
     [SerializeField] 
     Transform _target;
 

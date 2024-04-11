@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d396a6ee1e4e80b41a70d0299db4f176, type: 3}
   m_Name: Enemy
   m_EditorClassIdentifier: 
-  _thrustForce: 1000
-  _pitchForce: 1384
+  _thrustForce: 7000
+  _pitchForce: 1400
   _rollForce: 1000
-  _yawForce: 1861
+  _yawForce: 1200
   _shieldStrength: 100
   _shieldRegenAmount: 100
   _maxHealth: 100
-  _blasterDamage: 50
+  _blasterDamage: 100
   _blasterLaunchForce: 7500
   _blasterCoolDown: 1
   _blasterProjectileDuration: 3

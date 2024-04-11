@@ -4917,7 +4917,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.1972837, y: 2.1972837, z: 2.1972837}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2094068067535200792}
@@ -10904,6 +10904,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AIShipMovementControls
+      objectReference: {fileID: 0}
+    - target: {fileID: 8898876503513727776, guid: 1577e5dd8241208448dca18d6f6cc369,
+        type: 3}
+      propertyPath: _target
+      value: 
+      objectReference: {fileID: 6124476701410091073, guid: e6f3b60206ee26a46b6a1ca0a1f2d189,
+        type: 3}
+    - target: {fileID: 8987843823871055711, guid: 1577e5dd8241208448dca18d6f6cc369,
+        type: 3}
+      propertyPath: _layerMask.m_Bits
+      value: 4672
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3228480935814066361, guid: 1577e5dd8241208448dca18d6f6cc369, type: 3}
